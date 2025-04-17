@@ -41,9 +41,6 @@ export default function Home() {
       <main>
         <Hero searchType={searchType} setSearchType={setSearchType} />
 
-        {loading && <p className="loading-message">Cargando propiedades...</p>}
-        {error && <p className="error-message">Error: {error}</p>}
-
         <section className="categories-section">
           <CategoryGrid />
         </section>

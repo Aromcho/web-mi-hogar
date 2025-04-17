@@ -4,35 +4,27 @@ import "./Hero.css"
 import { useState, useRef, useEffect } from "react"
 import { Search, MapPin, SlidersHorizontal } from "lucide-react"
 import MapModal from "../MapModal/MapModal"
+import FilterPanel from "../FilterPanel/FilterPanel"
+import { fetchAutocomplete } from "../../utils/fetchAutocomplete"
 
 export default function Hero({ searchType, setSearchType }) {
   const [searchQuery, setSearchQuery] = useState("")
+  const [suggestions, setSuggestions] = useState([])
   const [showSuggestions, setShowSuggestions] = useState(false)
   const [showMapModal, setShowMapModal] = useState(false)
+  const [showFilterPanel, setShowFilterPanel] = useState(false)
+  const [activeFilters, setActiveFilters] = useState({})
   const searchInputRef = useRef(null)
-
-  // Sugerencias de ejemplo (en una implementación real, estas vendrían de una API)
-  const suggestions = [
-    "Palermo, Buenos Aires",
-    "Recoleta, Buenos Aires",
-    "Belgrano, Buenos Aires",
-    "Caballito, Buenos Aires",
-    "Núñez, Buenos Aires",
-    "Departamento con gimnasio",
-    "Casa con piscina",
-    "Departamento con balcón",
-    "Oficina en microcentro",
-  ].filter((suggestion) => searchQuery && suggestion.toLowerCase().includes(searchQuery.toLowerCase()))
+  const debounceRef = useRef(null)
 
   const handleSearch = (e) => {
     e.preventDefault()
-    // Implementar lógica de búsqueda
-    console.log("Buscando:", searchQuery, "Tipo:", searchType)
+    console.log("Buscando:", searchQuery, "Tipo:", searchType, "Filtros:", activeFilters)
     setShowSuggestions(false)
   }
 
-  const handleSuggestionClick = (suggestion) => {
-    setSearchQuery(suggestion)
+  const handleSuggestionClick = (sug) => {
+    setSearchQuery(sug)
     setShowSuggestions(false)
   }
 
@@ -42,6 +34,11 @@ export default function Hero({ searchType, setSearchType }) {
     }
   }
 
+  const handleApplyFilters = (filters) => {
+    setActiveFilters(filters)
+    console.log("Filtros aplicados:", filters)
+  }
+
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside)
     return () => {
@@ -49,10 +46,33 @@ export default function Hero({ searchType, setSearchType }) {
     }
   }, [])
 
+  useEffect(() => {
+    if (!searchQuery) {
+      setSuggestions([])
+      return
+    }
+
+    clearTimeout(debounceRef.current)
+    debounceRef.current = setTimeout(async () => {
+      const data = await fetchAutocomplete(searchQuery)
+      const list = data.map((d) => (d.secundvalue ? `${d.value}, ${d.secundvalue}` : d.value))
+      setSuggestions(list)
+      setShowSuggestions(true)
+    }, 300) // debounce 300 ms
+  }, [searchQuery])
+
+  // Calcular si hay filtros activos
+  const hasActiveFilters = Object.keys(activeFilters).some((key) => {
+    if (key === "amenities" && Array.isArray(activeFilters[key])) {
+      return activeFilters[key].length > 0
+    }
+    return activeFilters[key] !== "" && activeFilters[key] !== undefined
+  })
+
   return (
     <section className="hero-section">
       <div className="hero-content">
-        <h1 className="hero-title">Encontrá tu hogar ideal</h1>
+        <h1 className="hero-title">Elegí tu próximo capitulo</h1>
 
         <div className="search-container">
           <div className="search-tabs">
@@ -68,7 +88,7 @@ export default function Hero({ searchType, setSearchType }) {
             >
               Comprar
             </button>
-            <button className="tab-button map-button" onClick={() => setShowMapModal(true)}>
+            <button className="tab-button" onClick={() => setShowMapModal(true)}>
               <MapPin size={18} />
               Mapa
             </button>
@@ -76,27 +96,24 @@ export default function Hero({ searchType, setSearchType }) {
 
           <div className="search-box" ref={searchInputRef}>
             <form onSubmit={handleSearch}>
-              <div className="search-input-container">
+              <div className="hero-search-input-container">
                 <Search size={20} className="search-icon" />
                 <input
                   type="text"
-                  placeholder="Ingresa ubicaciones o características (ej. gimnasio)"
+                  placeholder="Ingresa ubicaciones o características"
                   value={searchQuery}
-                  onChange={(e) => {
-                    setSearchQuery(e.target.value)
-                    setShowSuggestions(true)
-                  }}
+                  onChange={(e) => setSearchQuery(e.target.value)}
                   onFocus={() => setShowSuggestions(true)}
-                  className="search-input"
+                  className="hero-search-input"
                 />
               </div>
 
               {showSuggestions && suggestions.length > 0 && (
-                <div className="search-suggestions">
-                  {suggestions.map((suggestion, index) => (
-                    <div key={index} className="suggestion-item" onClick={() => handleSuggestionClick(suggestion)}>
+                <div className="hero-search-suggestions">
+                  {suggestions.map((sug, idx) => (
+                    <div key={idx} className="hero-suggestion-item" onClick={() => handleSuggestionClick(sug)}>
                       <Search size={16} />
-                      <span>{suggestion}</span>
+                      <span>{sug}</span>
                     </div>
                   ))}
                 </div>
@@ -106,11 +123,24 @@ export default function Hero({ searchType, setSearchType }) {
                 <button type="submit" className="search-button">
                   Buscar
                 </button>
-                <button type="button" className="filter-button">
+                <button
+                  type="button"
+                  className={`filter-button ${hasActiveFilters ? "has-filters" : ""}`}
+                  onClick={() => setShowFilterPanel(!showFilterPanel)}
+                >
                   <SlidersHorizontal size={18} />
                   Filtrar por
+                  {hasActiveFilters && <span className="filter-badge"></span>}
                 </button>
               </div>
+
+              {showFilterPanel && (
+                <FilterPanel
+                  isOpen={showFilterPanel}
+                  onClose={() => setShowFilterPanel(false)}
+                  onApplyFilters={handleApplyFilters}
+                />
+              )}
             </form>
           </div>
         </div>

@@ -1,11 +1,11 @@
 .hero-section {
   position: relative;
-  height: 500px;
+  height: 400px;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .hero-section::before {
@@ -36,8 +36,9 @@
 .hero-content {
   position: relative;
   z-index: 2;
+  top: 80px;
   width: 100%;
-  max-width: 1000px;
+  max-width: 600px;
   padding: 0 20px;
 }
 
@@ -51,19 +52,20 @@
 .search-container {
   background-color: transparent;
   border-radius: 10px;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .search-tabs {
+  width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   gap: 10px;
   margin-bottom: 15px;
 }
 
 .tab-button {
-  padding: 15px 30px;
-  border-radius: 30px;
+  padding: 20px 50px;
+  border-radius: 20px;
   font-size: 1rem;
   font-weight: 600;
   border: none;
@@ -95,7 +97,7 @@
   gap: 15px;
 }
 
-.search-input-container {
+.hero-search-input-container {
   position: relative;
   width: 100%;
 }
@@ -108,7 +110,7 @@
   color: #7b8693;
 }
 
-.search-input {
+.hero-search-input {
   width: 100%;
   padding: 15px 15px 15px 45px;
   border: none;
@@ -117,21 +119,21 @@
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.search-suggestions {
+.hero-search-suggestions {
   position: absolute;
-  top: 100%;
+  z-index: 2;
+  top: 35%;
   left: 0;
   right: 0;
   background-color: white;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   margin-top: 5px;
-  z-index: 10;
   max-height: 300px;
   overflow-y: auto;
 }
 
-.suggestion-item {
+.hero-suggestion-item {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -141,23 +143,22 @@
   color: #333;
 }
 
-.suggestion-item:hover {
+.hero-suggestion-item:hover {
   background-color: #f5f5f5;
 }
 
 .search-actions {
   display: flex;
   gap: 15px;
-  margin-top: 15px;
 }
 
 .search-button {
   flex: 1;
-  padding: 15px;
+  padding: 20px;
   background-color: #7462e0;
   color: white;
   border: none;
-  border-radius: 30px;
+  border-radius: 20px;
   font-weight: 600;
   transition: background-color 0.2s;
   cursor: pointer;
@@ -169,7 +170,7 @@
 
 .filter-button {
   flex: 1;
-  padding: 15px;
+  padding: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -177,14 +178,270 @@
   background-color: #2c3e50;
   color: white;
   border: none;
-  border-radius: 30px;
+  border-radius: 20px;
   font-weight: 600;
   transition: background-color 0.2s;
   cursor: pointer;
+  position: relative;
 }
 
 .filter-button:hover {
   background-color: #34495e;
+}
+
+.filter-button.has-filters {
+  background-color: #6495ed;
+}
+
+.filter-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 10px;
+  height: 10px;
+  background-color: #e91e63;
+  border-radius: 50%;
+}
+
+/* Agregar estilos para el panel de filtros */
+.filters-panel {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  right: 0;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+  max-height: 80vh;
+  overflow-y: auto;
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.filters-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.filters-header h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.close-filters-button {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.2s;
+}
+
+.close-filters-button:hover {
+  background-color: #f5f5f5;
+}
+
+.filters-content {
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 25px;
+}
+
+.filter-section {
+  margin-bottom: 20px;
+}
+
+.filter-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: var(--text-primary);
+}
+
+.price-inputs,
+.area-inputs {
+  display: flex;
+  gap: 15px;
+}
+
+.input-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.input-group label {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.currency-input {
+  position: relative;
+}
+
+.currency-symbol {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-secondary);
+}
+
+.currency-input input {
+  width: 100%;
+  padding: 10px 10px 10px 25px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+.property-type-buttons,
+.room-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.property-type-buttons button,
+.room-buttons button {
+  padding: 8px 15px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.property-type-buttons button.active,
+.room-buttons button.active {
+  background-color: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+.amenities-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px;
+}
+
+.amenity-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.amenity-checkbox input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--primary);
+}
+
+.amenity-checkbox label {
+  font-size: 0.9rem;
+  color: var(--text-primary);
+}
+
+.filters-footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 20px;
+  border-top: 1px solid #eee;
+  background-color: #f9f9f9;
+  border-radius: 0 0 15px 15px;
+}
+
+.reset-filters-button {
+  padding: 10px 15px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.reset-filters-button:hover {
+  background-color: #f0f0f0;
+}
+
+.apply-filters-button {
+  padding: 10px 20px;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.apply-filters-button:hover {
+  background-color: #6351c7;
+}
+
+/* Asegurarse de que el search-box tenga position relative para que el panel de filtros se posicione correctamente */
+.search-box {
+  position: relative;
+}
+
+/* Estilos responsivos para el panel de filtros */
+@media (max-width: 768px) {
+  .filters-content {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .price-inputs,
+  .area-inputs {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .filters-footer {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .reset-filters-button,
+  .apply-filters-button {
+    width: 100%;
+  }
 }
 
 @media (max-width: 768px) {
