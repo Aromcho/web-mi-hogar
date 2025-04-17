@@ -1,0 +1,164 @@
+.property-card {
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+}
+
+.property-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.property-image {
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+}
+
+.property-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.property-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  z-index: 2;
+}
+
+.property-badge.temporary {
+  background-color: #ff9800;
+  color: white;
+}
+
+.property-agency-logo {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: white;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+
+.agency-logo-img {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.property-content {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.property-address {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: var(--text-primary);
+}
+
+.property-location {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 10px;
+}
+
+.property-price {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+}
+
+.property-availability {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 15px;
+}
+
+.property-features {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid #eee;
+  padding-top: 12px;
+  margin-top: auto;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+.property-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+  border-top: 1px solid #eee;
+  padding-top: 12px;
+}
+
+.property-action-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 8px;
+  border-radius: 4px;
+  border: none;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.property-action-btn span {
+  display: none;
+}
+
+.contact-btn {
+  background-color: var(--primary);
+  color: white;
+}
+
+.contact-btn:hover {
+  background-color: #6351c7;
+}
+
+.share-btn {
+  background-color: #f5f5f5;
+  color: var(--text-secondary);
+}
+
+.share-btn:hover {
+  background-color: #e9e9e9;
+}
+
+@media (min-width: 768px) {
+  .property-action-btn span {
+    display: inline;
+  }
+}

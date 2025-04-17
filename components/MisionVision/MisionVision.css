@@ -1,0 +1,32 @@
+.mision-vision-container {
+  display: flex;
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.mision-vision-card {
+  flex: 1;
+  background-color: white;
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.mision-vision-card h2 {
+  color: var(--primary);
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+}
+
+.mision-vision-card p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .mision-vision-container {
+    flex-direction: column;
+  }
+}

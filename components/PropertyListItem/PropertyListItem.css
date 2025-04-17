@@ -1,0 +1,118 @@
+.property-list-item {
+  display: flex;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.property-list-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.property-list-image {
+  width: 300px;
+  height: 200px;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.property-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.property-list-content {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.property-list-info {
+  flex: 1;
+}
+
+.property-list-address {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: var(--text-primary);
+}
+
+.property-list-location {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 15px;
+}
+
+.property-list-features {
+  display: flex;
+  gap: 20px;
+}
+
+.list-feature {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.property-list-price {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-left: 20px;
+  border-left: 1px solid #eee;
+}
+
+.price-tag {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.contact-button {
+  padding: 8px 16px;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+
+.contact-button:hover {
+  background-color: #6351c7;
+}
+
+@media (max-width: 768px) {
+  .property-list-item {
+    flex-direction: column;
+  }
+
+  .property-list-image {
+    width: 100%;
+  }
+
+  .property-list-content {
+    flex-direction: column;
+  }
+
+  .property-list-price {
+    border-left: none;
+    border-top: 1px solid #eee;
+    padding-left: 0;
+    padding-top: 15px;
+    margin-top: 15px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}

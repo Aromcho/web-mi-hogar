@@ -1,0 +1,247 @@
+.comprar-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin-top: 80px;
+
+}
+
+main {
+  flex: 1;
+}
+
+.comprar-hero {
+  position: relative;
+  height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.comprar-hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("/hero.jpg");
+  background-size: cover;
+  background-position: center;
+  filter: blur(2px);
+  z-index: -1;
+}
+
+.comprar-hero::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 0;
+}
+
+.comprar-hero-content {
+  position: relative;
+  z-index: 2;
+  color: white;
+  max-width: 800px;
+  padding: 0 20px;
+}
+
+.comprar-hero-content h1 {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+}
+
+.comprar-hero-content p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+.comprar-content {
+  padding: 30px 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.comprar-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding: 0 20px;
+}
+
+.search-input-container {
+  flex: 1;
+  max-width: 500px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.view-options {
+  display: flex;
+  gap: 10px;
+}
+
+.view-option-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 8px;
+  color: var(--text-secondary);
+  transition: all 0.2s;
+}
+
+.view-option-button.active {
+  background-color: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+.map-button {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 15px;
+}
+
+.comprar-layout {
+  display: flex;
+  gap: 30px;
+  padding: 0 20px;
+}
+
+.filters-sidebar {
+  width: 280px;
+  flex-shrink: 0;
+}
+
+.properties-content {
+  flex: 1;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 0;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 15px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.error-message {
+  text-align: center;
+  padding: 30px;
+  background-color: #fff3f3;
+  border-radius: 8px;
+  color: #e53935;
+}
+
+.retry-button {
+  margin-top: 15px;
+  padding: 8px 16px;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.map-container {
+  height: 600px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.map-placeholder {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  background-color: #eaeaea;
+  background-image: linear-gradient(45deg, #f0f0f0 25%, transparent 25%, transparent 75%, #f0f0f0 75%, #f0f0f0);
+  background-size: 20px 20px;
+}
+
+.map-placeholder p {
+  margin-top: 15px;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.map-placeholder span {
+  margin-top: 5px;
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+@media (max-width: 992px) {
+  .comprar-layout {
+    flex-direction: column;
+  }
+
+  .filters-sidebar {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .comprar-hero {
+    height: 200px;
+  }
+
+  .comprar-hero-content h1 {
+    font-size: 2rem;
+  }
+
+  .comprar-toolbar {
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+  }
+
+  .search-input-container {
+    width: 100%;
+    max-width: none;
+  }
+
+  .view-options {
+    width: 100%;
+    justify-content: space-between;
+  }
+}

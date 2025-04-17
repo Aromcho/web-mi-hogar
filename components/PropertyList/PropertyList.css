@@ -1,0 +1,28 @@
+.property-list-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.property-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  margin-bottom: 30px;
+}
+
+.property-row:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 992px) {
+  .property-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .property-row {
+    grid-template-columns: 1fr;
+  }
+}

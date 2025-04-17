@@ -1,0 +1,111 @@
+.about-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+}
+
+main {
+  flex: 1;
+}
+
+.about-hero {
+  height: 70vh;
+  padding: 60px 20px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.about-hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("/hero.jpg") center / cover no-repeat;
+  filter: blur(2px);
+  z-index: 0;
+}
+
+
+.about-hero-text {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  padding: 60px 20px;
+}
+.about-hero-text h1 {
+  font-size: 2.5rem;
+  color: var(--white) ;
+text-align: start;
+}
+.about-hero-text button {
+  font-size: 2rem;
+  color: var(--white) ;
+  align-self: start;
+  padding: 5px 20px;
+  background-color: var(--dark-blue);
+  border: none;
+  border-radius: 20px;
+}
+.about-hero-text p {
+  font-size: 1.5rem;
+  color: var(--white) ;
+  text-align: start;
+
+
+}
+.about-hero-image {
+  position: relative;
+  width: 50%;
+  height: 100%;
+  z-index: 1;
+}
+.about-hero-image img {
+  width: 600px;
+  height: auto;
+}
+
+.section-blue {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--dark-blue);
+  color: var(--white) ;
+  padding: 60px 20px;
+}
+.section-blue-title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: var(--white);
+}
+.section-blue-description {
+  max-width: 1200px;
+  text-align: center;
+  font-size: 1.8rem;
+  padding: 20px 60px;
+}
+.mision-vision-section {
+  padding: 60px 20px;
+  background-color: #f2f4f7;
+}
+
+.why-choose-section {
+  padding: 60px 20px;
+  background-color: #fff;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 2rem;
+  color: #333;
+}
